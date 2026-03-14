@@ -1,6 +1,6 @@
 # StopTouchingMyEyeballs
 
-A [ResoniteModLoader](https://github.com/resonite-modding-group/ResoniteModLoader) mod for [Resonite](https://resonite.com/) That disables the fallback raycast onthe EyeManager.<br>
+A [ResoniteModLoader](https://github.com/resonite-modding-group/ResoniteModLoader) mod for [Resonite](https://resonite.com/) That disables the eyetracking fallback raycast on the EyeManager.<br>
 Whenever the eyeData.ConvergenceDistance is "invalid" it falls back to a raycast that may hit something in such a way that it causes you to go crosseyed.<br>
 This mod just replaces that fallback with a fixed distance.<br>
 Workaround for bug #263
