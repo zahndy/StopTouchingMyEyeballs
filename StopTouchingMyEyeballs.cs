@@ -16,7 +16,7 @@ namespace StopTouchingMyEyeballs
         public override String Name => "StopTouchingMyEyeballs";
         public override String Author => "zahndy";
         public override String Link => "https://github.com/zahndy/StopTouchingMyEyeballs";
-        public override String Version => "1.0.0";
+        public override String Version => "1.0.1";
 
         public override void OnEngineInit()
         {
@@ -75,20 +75,16 @@ namespace StopTouchingMyEyeballs
                 __instance.RightEyeClose.Value = MathX.Lerp(MathX.Max(1f - eyeData.GetOpenness(EyeSide.Right), (float)__instance.RightEyeCloseOverride), 1f, ____awayCloseLerp);
                 __instance.CombinedEyeClose.Value = MathX.Max(__instance.LeftEyeClose.Value, __instance.RightEyeClose.Value);
 
-                float? pupilDiameter = eyeData.GetPupilDiameter(EyeSide.Left);
-                float num1 = 1000f;
-                float? nullable1 = pupilDiameter.HasValue ? new float?(pupilDiameter.GetValueOrDefault() * num1) : new float?();
-                pupilDiameter = eyeData.GetPupilDiameter(EyeSide.Right);
-                float num2 = 1000f;
-                float? nullable2 = pupilDiameter.HasValue ? new float?(pupilDiameter.GetValueOrDefault() * num2) : new float?();
-                if (nullable1.HasValue && nullable2.HasValue)
+                float? num2 = eyeData.GetPupilDiameter(EyeSide.Left) * 1000f;
+                float? num3 = eyeData.GetPupilDiameter(EyeSide.Right) * 1000f;
+                if (num2.HasValue && num3.HasValue)
                 {
                     simulatePupilSize = false;
-                    nullable1 = new float?(MathX.SmoothLerp(__instance.LeftEyePupilSizeMillimeters.Value, nullable1.Value, ref ____leftIntermediatePupilSize, __instance.Time.Delta * (float)__instance.EyeTrackingPupilSizeSmoothSpeed));
-                    nullable2 = new float?(MathX.SmoothLerp(__instance.RightEyePupilSizeMillimeters.Value, nullable2.Value, ref ____rightIntermediatePupilSize, __instance.Time.Delta * (float)__instance.EyeTrackingPupilSizeSmoothSpeed));
-                    __instance.LeftEyePupilSizeMillimeters.Value = nullable1.Value;
-                    __instance.RightEyePupilSizeMillimeters.Value = nullable2.Value;
-                    __instance.CombinedEyePupilSizeMillimeters.Value = (float)(((double)__instance.LeftEyePupilSizeMillimeters.Value + (double)__instance.RightEyePupilSizeMillimeters.Value) * 0.5);
+                    num2 = MathX.SmoothLerp(__instance.LeftEyePupilSizeMillimeters.Value, num2.Value, ref ____leftIntermediatePupilSize, __instance.Time.Delta * (float)__instance.EyeTrackingPupilSizeSmoothSpeed);
+                    num3 = MathX.SmoothLerp(__instance.RightEyePupilSizeMillimeters.Value, num3.Value, ref ____rightIntermediatePupilSize, __instance.Time.Delta * (float)__instance.EyeTrackingPupilSizeSmoothSpeed);
+                    __instance.LeftEyePupilSizeMillimeters.Value = num2.Value;
+                    __instance.RightEyePupilSizeMillimeters.Value = num3.Value;
+                    __instance.CombinedEyePupilSizeMillimeters.Value = (__instance.LeftEyePupilSizeMillimeters.Value + __instance.RightEyePupilSizeMillimeters.Value) * 0.5f;
                 }
                 __instance.LeftEyeWiden.Value = eyeData.GetWiden(EyeSide.Left);
                 __instance.RightEyeWiden.Value = eyeData.GetWiden(EyeSide.Right);
