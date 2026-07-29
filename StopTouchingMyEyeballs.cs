@@ -29,7 +29,7 @@ namespace StopTouchingMyEyeballs
         class EyeManagerUpdateFromEyeTrackingPatch
         {
             [HarmonyPrefix]
-            static bool Prefix(EyeManager __instance, Predicate<ICollider> ____raycastFilter, float ____awayCloseLerp, float  ____leftIntermediatePupilSize, float ____rightIntermediatePupilSize, IEyeDataSourceComponent eyeData, ref bool simulatePupilSize)
+            static bool Prefix(EyeManager __instance, Predicate<ICollider> ____raycastFilter, float ____awayCloseLerp, ref float  ____leftIntermediatePupilSize, ref float ____rightIntermediatePupilSize, IEyeDataSourceComponent eyeData, ref bool simulatePupilSize)
             {
                 Slot space = __instance.Slot.ActiveUserRoot?.Slot ?? __instance.Slot.GetObjectRoot(false);
                 bool isTracking1 = eyeData.GetIsTracking(EyeSide.Left);
