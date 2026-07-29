@@ -16,7 +16,7 @@ namespace StopTouchingMyEyeballs
         public override String Name => "StopTouchingMyEyeballs";
         public override String Author => "zahndy";
         public override String Link => "https://github.com/zahndy/StopTouchingMyEyeballs";
-        public override String Version => "1.0.1";
+        public override String Version => "1.0.2";
 
         public override void OnEngineInit()
         {
